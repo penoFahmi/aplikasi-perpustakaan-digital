@@ -14,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, HasUlids;
+   use HasApiTokens, HasFactory, Notifiable, HasUlids;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'membership_date',
     ];
 
     /**
@@ -53,7 +54,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function setUsernameAttribute($value)
+public function setEmailAttribute($value)
 {
     $this->attributes['email'] = strtolower($value);
 }

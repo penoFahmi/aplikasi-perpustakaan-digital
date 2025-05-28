@@ -4,10 +4,10 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\StockController;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookAuthorController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\UserController;
 
 
@@ -25,10 +25,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // });
 
     Route::apiResource('user', UserController::class);
-    // Route::apiResource('customer', CustomerController::class);
-    // Route::apiResource('barang', BarangController::class);
-    // Route::apiResource('stock', StockController::class);
-    // Route::apiResource('order', OrderController::class);
+    Route::apiResource('author', AuthorController::class);
+    Route::apiResource('book', BookController::class);
+    Route::apiResource('book_author', BookAuthorController::class);
+    Route::apiResource('loan', LoanController::class);
 
 });
 
