@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 
 class User extends Authenticatable
@@ -54,8 +56,13 @@ class User extends Authenticatable
         ];
     }
 
-public function setEmailAttribute($value)
-{
-    $this->attributes['email'] = strtolower($value);
-}
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
+
+    public function loans(): HasMany
+    {
+        return $this->hasMany(Loan::class, 'user_id');
+    }
 }

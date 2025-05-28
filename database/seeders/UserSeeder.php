@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@ifump.net',
             'password' => Hash::make('password'),
-            'membership_date' => Carbon::now()
+            'membership_date' => Carbon::now(),
         ]);
     }
 }
