@@ -4,7 +4,7 @@
 		"name": "Aplikasi Perpustakaan Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31441470",
-		"_collection_link": "https://restless-star-267830.postman.co/workspace/05d1a68a-fd5e-4331-830d-8ddb8b179866/collection/31441470-15a1a807-c5b2-4a57-a3e6-7cfb852294c3?action=share&source=collection_link&creator=31441470"
+		"_collection_link": "https://restless-star-267830.postman.co/workspace/My-Workspace~05d1a68a-fd5e-4331-830d-8ddb8b179866/collection/31441470-15a1a807-c5b2-4a57-a3e6-7cfb852294c3?action=share&source=collection_link&creator=31441470"
 	},
 	"item": [
 		{
@@ -88,17 +88,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "muhai",
+									"value": "Jonscy",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "muhai@gmail.com",
+									"value": "Jonscy@mail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "dadadadsdadadads",
+									"value": "pasword123",
 									"type": "text"
 								}
 							]
@@ -144,7 +144,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"azmibeluga\",\r\n  \"email\": \"casdadsds@gmail.com\",\r\n  \"password\": \"passwadssddsord123\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Ahmed\",\r\n  \"email\": \"ahmed@mail.com\",\r\n  \"password\": \"password567\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,17 +309,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "dontol 1",
+									"value": "Yoga Ahmed",
 									"type": "text"
 								},
 								{
 									"key": "nationality",
-									"value": "indoaja",
+									"value": "Italia",
 									"type": "text"
 								},
 								{
 									"key": "birthdate",
-									"value": "20 mei 2002",
+									"value": "20 mei 1980",
 									"type": "text"
 								}
 							]
@@ -365,7 +365,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"amat\",\r\n  \"nationality\": \"punggor\",\r\n  \"birthdate\": \"27 mei 2025\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Yudas\",\r\n  \"nationality\": \"Malaysia\",\r\n  \"birthdate\": \"27 mei 1990\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -520,7 +520,7 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "tung tung sahur",
+									"value": "Sangkakala",
 									"type": "text"
 								},
 								{
@@ -530,7 +530,7 @@
 								},
 								{
 									"key": "publisher",
-									"value": "cw ori",
+									"value": "erlingga",
 									"type": "text"
 								},
 								{
@@ -540,7 +540,7 @@
 								},
 								{
 									"key": "stock",
-									"value": "1",
+									"value": "90",
 									"type": "text"
 								}
 							]
@@ -586,7 +586,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"baju lusuh\",\r\n  \"isbn\": \"12\",\r\n  \"publisher\": \"2000000\",\r\n  \"year_publisher\": \"baju lusuh\",\r\n  \"stock\": \"12\"\r\n}",
+							"raw": "{\r\n  \"title\": \"Kematian\",\r\n  \"isbn\": \"1232323\",\r\n  \"publisher\": \"Gamdias\",\r\n  \"year_publisher\": \"2017\",\r\n  \"stock\": \"12\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -802,7 +802,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"user_id\": \"5\",\r\n  \"book_id\": \"5\"\r\n}",
+							"raw": "{\r\n//   \"user_id\": \"5\",\r\n  \"book_id\": \"734ggdf5wfkjx99\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -962,7 +962,7 @@
 								},
 								{
 									"key": "author_id",
-									"value": "",
+									"value": "01jvpmd6vc91wsfsdsfbvsjdfj80",
 									"type": "text"
 								}
 							]
