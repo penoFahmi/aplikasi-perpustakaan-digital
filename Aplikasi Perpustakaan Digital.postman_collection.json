@@ -1,0 +1,1259 @@
+{
+	"info": {
+		"_postman_id": "15a1a807-c5b2-4a57-a3e6-7cfb852294c3",
+		"name": "Aplikasi Perpustakaan Digital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31441470",
+		"_collection_link": "https://restless-star-267830.postman.co/workspace/05d1a68a-fd5e-4331-830d-8ddb8b179866/collection/31441470-15a1a807-c5b2-4a57-a3e6-7cfb852294c3?action=share&source=collection_link&creator=31441470"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/user/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "4ZT5KE5LsKK3rwxNf2FqOKpzloXjZVUCJ5vfOKyW8a6514c4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/user/01jwbg3zdskaq28q6bpnsr4tm0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"01jwbg3zdskaq28q6bpnsr4tm0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "muhai",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "muhai@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "dadadadsdadadads",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"azmibeluga\",\r\n  \"email\": \"casdadsds@gmail.com\",\r\n  \"password\": \"passwadssddsord123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/user/01jwc7ppega4bkfrwxpwec9r24",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"01jwc7ppega4bkfrwxpwec9r24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "v14mFVcLNRlEzFblk9obhSEafOktZywC1VHPhblWb6f29070",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/user/01jwc6zfeww4mz7pz9erpk5ttg",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"01jwc6zfeww4mz7pz9erpk5ttg"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "qj5FC3eOgT4sFITm8iqNNXAuFWoTHahN6958s314921c3bc2",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Get Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/author/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"author",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Author by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/author/01jsd89djv0b88380h9e212rdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"author",
+								"01jsd89djv0b88380h9e212rdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "dontol 1",
+									"type": "text"
+								},
+								{
+									"key": "nationality",
+									"value": "indoaja",
+									"type": "text"
+								},
+								{
+									"key": "birthdate",
+									"value": "20 mei 2002",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/author",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"amat\",\r\n  \"nationality\": \"punggor\",\r\n  \"birthdate\": \"27 mei 2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/author/01jwc9vbwtjsjbdbv3kpv3k9yg",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"author",
+								"01jwc9vbwtjsjbdbv3kpv3k9yg"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Author",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/author/01jsdefpse172kdm3gy9vt6ty7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"author",
+								"01jsdefpse172kdm3gy9vt6ty7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "qj5FC3eOgT4sFITm8iqNNXAuFWoTHahN6958s314921c3bc2",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Get Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "O6LnnydZvlXTcQRKQyBJmz53xKHUCRH2OiJTK6secb547408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "tung tung sahur",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "34343",
+									"type": "text"
+								},
+								{
+									"key": "publisher",
+									"value": "cw ori",
+									"type": "text"
+								},
+								{
+									"key": "year_published",
+									"value": "2025",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/book",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"baju lusuh\",\r\n  \"isbn\": \"12\",\r\n  \"publisher\": \"2000000\",\r\n  \"year_publisher\": \"baju lusuh\",\r\n  \"stock\": \"12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/book/01jwca3x20stj8txa52jjer43p",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"01jwca3x20stj8txa52jjer43p"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "OpX5JRcOP4OfPLN5KSrLaJLWClyxfMKCq7aXci2racc40e18",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book/01jvvr9znwshtt6fvhqc6skmhp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book",
+								"01jvvr9znwshtt6fvhqc6skmhp"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "qj5FC3eOgT4sFITm8iqNNXAuFWoTHahN6958s314921c3bc2",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Loan",
+			"item": [
+				{
+					"name": "Get Loan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/loan/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Loan by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/loan/01jsd89djv0b88380h9e212rdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"01jsd89djv0b88380h9e212rdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Loan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "01jwc7ppega4bkfrwxpwec9r24",
+									"type": "text"
+								},
+								{
+									"key": "book_id",
+									"value": "01jwca3x20stj8txa52jjer43p",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loan",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Loan",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"user_id\": \"5\",\r\n  \"book_id\": \"5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loan/01jvybbk9f13sw70pnbvjcc9v5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"01jvybbk9f13sw70pnbvjcc9v5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Loan",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/loan/01jsdefpse172kdm3gy9vt6ty7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loan",
+								"01jsdefpse172kdm3gy9vt6ty7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "qj5FC3eOgT4sFITm8iqNNXAuFWoTHahN6958s314921c3bc2",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Book Author",
+			"item": [
+				{
+					"name": "Get Book Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "O6LnnydZvlXTcQRKQyBJmz53xKHUCRH2OiJTK6secb547408",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book_author/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book_author",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Book Author by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book_author/01jsd89djv0b88380h9e212rdf",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book_author",
+								"01jsd89djv0b88380h9e212rdf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Book Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "book_id",
+									"value": "01jvpmd6vc91wdpdexc610zkwj",
+									"type": "text"
+								},
+								{
+									"key": "author_id",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/book_author",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book_author"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Book Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"book_id\": \"17\",\r\n  \"author_id\": \"600000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/book_author/01jvyctn7vv2w84zkxtx3hy063",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book_author",
+								"01jvyctn7vv2w84zkxtx3hy063"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Hapus Book Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "PDfQbuPisJERb23Ftx6i3hblqtmtso6N8kAB33Hnb2b8283e",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/book_author/01jsdefpse172kdm3gy9vt6ty7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"book_author",
+								"01jsdefpse172kdm3gy9vt6ty7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "qj5FC3eOgT4sFITm8iqNNXAuFWoTHahN6958s314921c3bc2",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var template = `\r",
+							"<style type=\"text/css\">\r",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+							"    .tftable tr {background-color:#ffffff;}\r",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+							"    .tftable tr:hover {background-color:#e0ffff;}\r",
+							"</style>\r",
+							"\r",
+							"<table class=\"tftable\" border=\"1\">\r",
+							"    <tr>\r",
+							"        <th>User ID</th>\r",
+							"        <th>Name</th>\r",
+							"        <th>Username</th>\r",
+							"        <th>Email</th>\r",
+							"        <th>Created At</th>\r",
+							"        <th>Updated At</th>\r",
+							"    </tr>\r",
+							"    <tr>\r",
+							"        <td>{{response.user.id}}</td>\r",
+							"        <td>{{response.user.name}}</td>\r",
+							"        <td>{{response.user.username}}</td>\r",
+							"        <td>{{response.user.email}}</td>\r",
+							"        <td>{{response.user.created_at}}</td>\r",
+							"        <td>{{response.user.updated_at}}</td>\r",
+							"    </tr>\r",
+							"</table>\r",
+							"`;\r",
+							"\r",
+							"function constructVisualizerPayload() {\r",
+							"    return {response: pm.response.json()}\r",
+							"}\r",
+							"\r",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "admin@ifump.net",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/api/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "admin@ifump.net",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Jn2GORZf1fIh0J1TWvJ8Hw1EeZTcltayn92HaXhH04e61338",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/api/logout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
