@@ -11,14 +11,14 @@ class BookAuthorController extends Controller
 {
     public function index(): JsonResponse
     {
-        $bookAuthors = BookAuthor::all();
+        $bookAuthors = BookAuthor::with(['book','author'])->get();
         return response()->json($bookAuthors, 200);
     }
 
     public function show($id): JsonResponse
     {
         try {
-            $bookAuthor = BookAuthor::findOrFail($id);
+            $bookAuthor = BookAuthor::with(['book','author'])->findOrFail($id);
             return response()->json($bookAuthor, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Book Author not found'], 404);

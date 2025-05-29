@@ -11,14 +11,14 @@ class LoanController extends Controller
 {
     public function index(): JsonResponse
     {
-        $loans = Loan::all();
+        $loans = Loan::with(['user','book'])->get();
         return response()->json($loans, 200);
     }
 
     public function show($id): JsonResponse
     {
         try {
-            $loan = Loan::findOrFail($id);
+            $loan = Loan::with(['user','book'])->findOrFail($id);
             return response()->json($loan, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Loan not found'], 404);

@@ -17,11 +17,11 @@ class BookAuthor extends Model
         'author_id',
     ];
 
-    protected function casts(): array
+        protected function casts(): array
     {
         return [
-            'book_id' => 'ulid',
-            'author_id' => 'ulid',
+            'book_id' => 'string',
+            'author_id' => 'string',
         ];
     }
 

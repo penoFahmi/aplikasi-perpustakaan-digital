@@ -17,12 +17,13 @@ class Loan extends Model
         'book_id',
     ];
 
-    // protected function casts(): array
-    // {
-    //     return [
-    //         'limit' => 'integer',
-    //     ];
-    // }
+    protected function casts(): array
+    {
+        return [
+            'user_id' => 'string',
+            'book_id' => 'string',
+        ];
+    }
 
     public function user(): BelongsTo
     {

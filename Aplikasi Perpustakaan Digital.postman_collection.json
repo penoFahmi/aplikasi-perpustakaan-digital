@@ -4,7 +4,7 @@
 		"name": "Aplikasi Perpustakaan Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31441470",
-		"_collection_link": "https://restless-star-267830.postman.co/workspace/My-Workspace~05d1a68a-fd5e-4331-830d-8ddb8b179866/collection/31441470-15a1a807-c5b2-4a57-a3e6-7cfb852294c3?action=share&source=collection_link&creator=31441470"
+		"_collection_link": "https://restless-star-267830.postman.co/workspace/05d1a68a-fd5e-4331-830d-8ddb8b179866/collection/31441470-15a1a807-c5b2-4a57-a3e6-7cfb852294c3?action=share&source=collection_link&creator=31441470"
 	},
 	"item": [
 		{
@@ -18,7 +18,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -47,7 +47,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "4ZT5KE5LsKK3rwxNf2FqOKpzloXjZVUCJ5vfOKyW8a6514c4",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -55,14 +55,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/user/01jwbg3zdskaq28q6bpnsr4tm0",
+							"raw": "{{base_url}}/api/user/01jwev8kdf1ejpcm0htjwwnv5z",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"01jwbg3zdskaq28q6bpnsr4tm0"
+								"01jwev8kdf1ejpcm0htjwwnv5z"
 							]
 						}
 					},
@@ -76,7 +76,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -124,7 +124,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -152,14 +152,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/user/01jwc7ppega4bkfrwxpwec9r24",
+							"raw": "{{base_url}}/api/user/01jwevb7knd80jq9y32dxey9ge",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"01jwc7ppega4bkfrwxpwec9r24"
+								"01jwevb7knd80jq9y32dxey9ge"
 							]
 						}
 					},
@@ -173,7 +173,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "v14mFVcLNRlEzFblk9obhSEafOktZywC1VHPhblWb6f29070",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -181,14 +181,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/user/01jwc6zfeww4mz7pz9erpk5ttg",
+							"raw": "{{base_url}}/api/user/01jwevb7knd80jq9y32dxey9ge",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"01jwc6zfeww4mz7pz9erpk5ttg"
+								"01jwevb7knd80jq9y32dxey9ge"
 							]
 						}
 					},
@@ -239,7 +239,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -268,7 +268,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -276,14 +276,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/author/01jsd89djv0b88380h9e212rdf",
+							"raw": "{{base_url}}/api/author/01jwevf52zmdv91kt6deknw420",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"author",
-								"01jsd89djv0b88380h9e212rdf"
+								"01jwevf52zmdv91kt6deknw420"
 							]
 						}
 					},
@@ -297,7 +297,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -309,12 +309,12 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Yoga Ahmed",
+									"value": "Lamin",
 									"type": "text"
 								},
 								{
 									"key": "nationality",
-									"value": "Italia",
+									"value": "Spanyol",
 									"type": "text"
 								},
 								{
@@ -345,7 +345,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -365,7 +365,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Yudas\",\r\n  \"nationality\": \"Malaysia\",\r\n  \"birthdate\": \"27 mei 1990\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Arda Guler\",\r\n  \"nationality\": \"Turki\",\r\n  \"birthdate\": \"27 mei 1990\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -373,14 +373,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/author/01jwc9vbwtjsjbdbv3kpv3k9yg",
+							"raw": "{{base_url}}/api/author/01jwevf52zmdv91kt6deknw420",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"author",
-								"01jwc9vbwtjsjbdbv3kpv3k9yg"
+								"01jwevf52zmdv91kt6deknw420"
 							]
 						}
 					},
@@ -389,17 +389,27 @@
 				{
 					"name": "Hapus Author",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/author/01jsdefpse172kdm3gy9vt6ty7",
+							"raw": "{{base_url}}/api/author/01jwevf52zmdv91kt6deknw420",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"author",
-								"01jsdefpse172kdm3gy9vt6ty7"
+								"01jwevf52zmdv91kt6deknw420"
 							]
 						}
 					},
@@ -450,7 +460,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "O6LnnydZvlXTcQRKQyBJmz53xKHUCRH2OiJTK6secb547408",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -479,7 +489,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -487,14 +497,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/book/",
+							"raw": "{{base_url}}/api/book/01jwevn8rm4z54fmw1v1cm02kn",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book",
-								""
+								"01jwevn8rm4z54fmw1v1cm02kn"
 							]
 						}
 					},
@@ -508,7 +518,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -520,17 +530,17 @@
 							"formdata": [
 								{
 									"key": "title",
-									"value": "Sangkakala",
+									"value": "Tetap Hidup",
 									"type": "text"
 								},
 								{
 									"key": "isbn",
-									"value": "34343",
+									"value": "3432124",
 									"type": "text"
 								},
 								{
 									"key": "publisher",
-									"value": "erlingga",
+									"value": "rumahbaca",
 									"type": "text"
 								},
 								{
@@ -566,7 +576,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -594,14 +604,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/book/01jwca3x20stj8txa52jjer43p",
+							"raw": "{{base_url}}/api/book/01jwevn8rm4z54fmw1v1cm02kn",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book",
-								"01jwca3x20stj8txa52jjer43p"
+								"01jwevn8rm4z54fmw1v1cm02kn"
 							]
 						}
 					},
@@ -615,7 +625,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "OpX5JRcOP4OfPLN5KSrLaJLWClyxfMKCq7aXci2racc40e18",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -623,14 +633,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/book/01jvvr9znwshtt6fvhqc6skmhp",
+							"raw": "{{base_url}}/api/book/01jwevn8rm4z54fmw1v1cm02kn",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book",
-								"01jvvr9znwshtt6fvhqc6skmhp"
+								"01jwevn8rm4z54fmw1v1cm02kn"
 							]
 						}
 					},
@@ -681,7 +691,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "bhbqQcayGRlAY8btKL1X15T955abvAEVcn2Yjvmn86d1327e",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -710,7 +720,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -718,14 +728,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/loan/01jsd89djv0b88380h9e212rdf",
+							"raw": "{{base_url}}/api/loan/01jwevytg2zr2x0bqezebfqxp5",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"loan",
-								"01jsd89djv0b88380h9e212rdf"
+								"01jwevytg2zr2x0bqezebfqxp5"
 							]
 						}
 					},
@@ -739,7 +749,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9GPmN9KnQwfSfunOSlqWAaBC5Uu5c4aI9OQ40OTk0221aced",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -751,12 +761,12 @@
 							"formdata": [
 								{
 									"key": "user_id",
-									"value": "01jwc7ppega4bkfrwxpwec9r24",
+									"value": "01jwevc6th8fp0gvt1fz37ktvq",
 									"type": "text"
 								},
 								{
 									"key": "book_id",
-									"value": "01jwca3x20stj8txa52jjer43p",
+									"value": "01jwevqg4r732xaynpada1ck4m",
 									"type": "text"
 								}
 							]
@@ -782,7 +792,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -802,7 +812,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n//   \"user_id\": \"5\",\r\n  \"book_id\": \"734ggdf5wfkjx99\"\r\n}",
+							"raw": "{\r\n  \"user_id\": \"01jwev8kdf1ejpcm0htjwwnv5z\",\r\n  \"book_id\": \"01jwevpcn7pm6jmyerc0pqcm7z\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -810,14 +820,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/loan/01jvybbk9f13sw70pnbvjcc9v5",
+							"raw": "{{base_url}}/api/loan/01jwew2r9pwtkcsyv89a1d865z",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"loan",
-								"01jvybbk9f13sw70pnbvjcc9v5"
+								"01jwew2r9pwtkcsyv89a1d865z"
 							]
 						}
 					},
@@ -826,17 +836,27 @@
 				{
 					"name": "Hapus Loan",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/loan/01jsdefpse172kdm3gy9vt6ty7",
+							"raw": "{{base_url}}/api/loan/01jwew2r9pwtkcsyv89a1d865z",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"loan",
-								"01jsdefpse172kdm3gy9vt6ty7"
+								"01jwew2r9pwtkcsyv89a1d865z"
 							]
 						}
 					},
@@ -887,7 +907,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "O6LnnydZvlXTcQRKQyBJmz53xKHUCRH2OiJTK6secb547408",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -916,7 +936,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "01jsf4d02ympze2ag5g3svzjng",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -924,14 +944,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/book_author/01jsd89djv0b88380h9e212rdf",
+							"raw": "{{base_url}}/api/book_author/01jwewcp4davaermfsyyn42a26",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book_author",
-								"01jsd89djv0b88380h9e212rdf"
+								"01jwewcp4davaermfsyyn42a26"
 							]
 						}
 					},
@@ -945,7 +965,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -957,12 +977,12 @@
 							"formdata": [
 								{
 									"key": "book_id",
-									"value": "01jvpmd6vc91wdpdexc610zkwj",
+									"value": "01jwevpcn7pm6jmyerc0pqcm7z",
 									"type": "text"
 								},
 								{
 									"key": "author_id",
-									"value": "01jvpmd6vc91wsfsdsfbvsjdfj80",
+									"value": "01jwevg499e9qknvbatpw3y0ep",
 									"type": "text"
 								}
 							]
@@ -988,7 +1008,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "uE1386yXZ3UVIVnPHh9giz5145XKAPsFuLTNPGqfdcdbf82a",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -1008,7 +1028,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"book_id\": \"17\",\r\n  \"author_id\": \"600000\"\r\n}",
+							"raw": "{\r\n  \"book_id\": \"01jwevqg4r732xaynpada1ck4m\",\r\n  \"author_id\": \"01jwevergrfrk4f63dhbqbmmve\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1016,14 +1036,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/book_author/01jvyctn7vv2w84zkxtx3hy063",
+							"raw": "{{base_url}}/api/book_author/01jwewcp4davaermfsyyn42a26",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book_author",
-								"01jvyctn7vv2w84zkxtx3hy063"
+								"01jwewcp4davaermfsyyn42a26"
 							]
 						}
 					},
@@ -1037,7 +1057,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "PDfQbuPisJERb23Ftx6i3hblqtmtso6N8kAB33Hnb2b8283e",
+									"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 									"type": "string"
 								}
 							]
@@ -1045,14 +1065,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/api/book_author/01jsdefpse172kdm3gy9vt6ty7",
+							"raw": "{{base_url}}/api/book_author/01jwewhctx64hs8ynzhn9y90pp",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"api",
 								"book_author",
-								"01jsdefpse172kdm3gy9vt6ty7"
+								"01jwewhctx64hs8ynzhn9y90pp"
 							]
 						}
 					},
@@ -1196,7 +1216,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "Jn2GORZf1fIh0J1TWvJ8Hw1EeZTcltayn92HaXhH04e61338",
+							"value": "XojUca75qfljm4OHdrazzj6l13501x92aOZc8kHlbbb19b07",
 							"type": "string"
 						}
 					]
