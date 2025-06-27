@@ -5,13 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Models\Role;
+use App\Http\Requests\RegisterRequest;
+use Carbon\Carbon;
 
 
 class AuthController extends Controller
 {
+    public function register(RegisterRequest $request)
+    {
+        $validated = $request->validated();
+
+        $userRole = Role::where('name', 'user')->firstOrFail();
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role_id' => $userRole->id,
+            'membership_date' => Carbon::now(),
+        ]);
+
+        $user->load('role');
+
+        return (new UserResource($user))
+                ->response()
+                ->setStatusCode(201); // 201 Created
+    }
+
     public function login(LoginRequest $request)
     {
         $credentials = $request->validated();
@@ -24,10 +49,12 @@ class AuthController extends Controller
             ]);
         }
 
+        $user->load('role');
+
 
         return response()->json([
             'token' => $user->createToken('mobile-token')->plainTextToken,
-            'user' => $user,
+            'user' => new UserResource($user)
         ]);
     }
 

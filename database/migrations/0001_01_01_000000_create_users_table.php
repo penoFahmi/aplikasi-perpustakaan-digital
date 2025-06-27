@@ -11,6 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('roles', function (Blueprint $table) {
+            $table->ulid('id')->primary();
+            $table->string('name')->unique();
+            $table->string('display_name');
+            $table->integer('level')->default(0);
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
@@ -20,6 +28,7 @@ return new class extends Migration
             $table->timestamp('membership_date')->useCurrent();
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignUlid('role_id')->constrained('roles')->casecadeonDelete();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
