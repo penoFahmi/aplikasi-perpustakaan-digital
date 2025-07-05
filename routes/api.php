@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //     Route::post('/user/store', 'store');
     //     Route::patch('/user/{id}/update', 'update');
     //     Route::get('/user/{id}','show');
-    //     Route::delete('/user/{id}', 'destroy');
+    //     Route::delete('/user/{id}', 'destroy');                  
     // });
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user/profile', [UserController::class, 'profile']);
