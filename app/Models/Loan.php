@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Loan extends Model
 {
-     use HasUlids;
+    use HasUlids;
 
     protected $table = 'loans';
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -77,6 +78,44 @@ class UserController extends Controller
             ], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'User not found'], 404);
+        }
+    }
+
+    public function profile(Request $request): JsonResponse
+    {
+        $authUser = Auth::user();
+        $user = User::findOrFail($authUser->id);
+
+        $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:users,email,' . $user->id,
+            'password' => 'sometimes|string|min:6|confirmed',
+        ]);
+
+        $dataToUpdate = $request->only(['name', 'email']);
+        if ($request->filled('password')) {
+            $dataToUpdate['password'] = bcrypt($request->password);
+        }
+
+        $user->update($dataToUpdate);
+
+        return response()->json([
+            'message' => 'Profil berhasil diupdate.',
+            'data' => $user
+        ], 200);
+    }
+
+    public function deleteAccount(User $user): JsonResponse
+    {
+        try {
+            // Karena kita sudah mendapatkan $user dari rute,
+            // kita bisa langsung menghapusnya.
+            $user->delete();
+
+            return response()->json(['message' => 'User berhasil dihapus.']);
+        } catch (\Exception $e) {
+            // Penanganan error umum jika terjadi masalah saat menghapus
+            return response()->json(['message' => 'Gagal menghapus user.'], 500);
         }
     }
 

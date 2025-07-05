@@ -23,23 +23,18 @@ Route::middleware('auth:sanctum')->group(function () {
     //     Route::get('/user/{id}','show');
     //     Route::delete('/user/{id}', 'destroy');
     // });
-
-    // Route untuk SEMUA user yang sudah login
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user/profile', [UserController::class, 'profile']); // User melihat profil sendiri
-    Route::apiResource('loan', LoanController::class); // User mengelola peminjaman sendiri
+    Route::get('/user/profile', [UserController::class, 'profile']);
+    Route::patch('/user/profile', [UserController::class, 'profile']);
+    Route::apiResource('loan', LoanController::class);
+    Route::apiResource('user', UserController::class);
+    Route::delete('/user/{user}', [UserController::class, 'deleteAccount']);
 
-    // Group untuk route yang HANYA bisa diakses oleh SUPERADMIN & ADMIN
     Route::middleware('role:superadmin,pustakawan')->group(function () {
-        // Manajemen data master oleh admin
         Route::apiResource('author', AuthorController::class);
         Route::apiResource('book', BookController::class);
         Route::apiResource('book_author', BookAuthorController::class);
-    });
+        Route::apiResource('loan', LoanController::class);
 
-    // Group untuk route yang HANYA bisa diakses oleh SUPERADMIN
-    Route::middleware('role:superadmin')->group(function () {
-        // Manajemen semua user hanya oleh superadmin
-        Route::apiResource('user', UserController::class)->except(['profile']);
     });
 });
