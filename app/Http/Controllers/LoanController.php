@@ -78,59 +78,76 @@ class LoanController extends Controller
         }
     }
 
+//Ini code lama update biasa tanpa ada pengembalian stock pada tabel buku
+    // public function update(Request $request, $id): JsonResponse
+    // {
+    //     try {
+    //         $loan = Loan::findOrFail($id);
+
+    //         $request->validate([
+    //             'user_id' => 'sometimes|exists:users,id',
+    //             'book_id' => 'sometimes|exists:books,id',
+    //         ]);
+
+    //         // Only update the fields provided
+    //         $data = $request->only(['user_id', 'book_id']);
+    //         $loan->update($data);
+
+    //         return response()->json([
+    //             'message' => $loan->wasChanged()
+    //                 ? 'Loan data successfully updated.'
+    //                 : 'No changes were made.',
+    //             'data' => $loan
+    //         ], 200);
+    //     } catch (ModelNotFoundException $e) {
+    //         return response()->json(['message' => 'Loan not found'], 404);
+    //     }
+
+    // }
+
+
     public function update(Request $request, $id): JsonResponse
     {
-//Ini code lama update biasa tanpa ada pengembalian stock pada tabel buku
-        // try {
-        //     $loan = Loan::findOrFail($id);
-
-        //     $request->validate([
-        //         'user_id' => 'sometimes|exists:users,id',
-        //         'book_id' => 'sometimes|exists:books,id',
-        //     ]);
-
-        //     // Only update the fields provided
-        //     $data = $request->only(['user_id', 'book_id']);
-        //     $loan->update($data);
-
-        //     return response()->json([
-        //         'message' => $loan->wasChanged()
-        //             ? 'Loan data successfully updated.'
-        //             : 'No changes were made.',
-        //         'data' => $loan
-        //     ], 200);
-        // } catch (ModelNotFoundException $e) {
-        //     return response()->json(['message' => 'Loan not found'], 404);
-        // }
-
-//Ini yang baru
         try {
             $loan = Loan::findOrFail($id);
 
-            // Jika buku sudah dikembalikan, jangan lakukan apa-apa
-            if ($loan->status === 'Dikembalikan') {
-                return response()->json(['message' => 'This book has already been returned.'], 400);
+            // KONDISI 1: Jika ini adalah permintaan PENGEMBALIAN BUKU
+            if ($request->has('status') && $request->status === 'Dikembalikan') {
+                if ($loan->status === 'Dikembalikan') {
+                    return response()->json(['message' => 'This book has already been returned.'], 400);
+                }
+
+                DB::transaction(function () use ($loan) {
+                    $loan->update(['status' => 'Dikembalikan']);
+                    $book = Book::findOrFail($loan->book_id);
+                    $book->increment('stock');
+                });
+
+                return response()->json([
+                    'message' => 'Book successfully returned.',
+                    'data' => $loan->load(['user', 'book']) // Muat ulang relasi
+                ], 200);
             }
 
-            // Memulai transaction
-            DB::transaction(function () use ($loan) {
-                // Update status peminjaman
-                $loan->update(['status' => 'Dikembalikan']);
+            // KONDISI 2: Jika ini adalah permintaan EDIT BIASA
+            $request->validate([
+                'user_id' => 'sometimes|required|exists:users,id',
+                // Kita tidak memperbolehkan edit buku karena akan merusak data stok
+                // 'book_id' => 'sometimes|required|exists:books,id',
+            ]);
 
-                // Tambah stok buku kembali
-                $book = Book::findOrFail($loan->book_id);
-                $book->increment('stock');
-            });
+            $data = $request->only(['user_id']);
+            $loan->update($data);
 
             return response()->json([
-                'message' => 'Book successfully returned.',
-                'data' => $loan
+                'message' => 'Loan data successfully updated.',
+                'data' => $loan->load(['user', 'book']) // Muat ulang relasi
             ], 200);
 
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Loan not found'], 404);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'An error occurred.'], 500);
+            return response()->json(['message' => 'An error occurred while updating.', 'error' => $e->getMessage()], 500);
         }
     }
 
