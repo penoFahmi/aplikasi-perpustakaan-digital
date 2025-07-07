@@ -15,6 +15,7 @@ class Loan extends Model
     protected $fillable = [
         'user_id',
         'book_id',
+        'status',
     ];
 
     protected function casts(): array

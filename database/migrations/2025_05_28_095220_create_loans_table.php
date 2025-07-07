@@ -16,6 +16,7 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->foreignUlid('user_id')->constrained('users')->cascadeOnDelete();
             $table->foreignUlid('book_id')->constrained('books')->cascadeOnDelete();
+            $table->string('status')->default('Dipinjam');
             $table->timestamps();
         });
     }
