@@ -18,8 +18,8 @@ class BookController extends Controller
     public function show($id): JsonResponse
     {
         try {
-            $book = Book::findOrFail($id);
-            return response()->json($book, 200);
+            $books = Book::findOrFail($id);
+            return response()->json($books, 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Book not found'], 404);
         }
@@ -52,11 +52,11 @@ class BookController extends Controller
     public function update(Request $request, $id): JsonResponse
     {
         try {
-            $book = Book::findOrFail($id);
+            $books = Book::findOrFail($id);
 
             $request->validate([
                 'title' => 'sometimes|string|max:255',
-                'isbn' => 'sometimes|string|unique:books,isbn,' . $book->id,
+                'isbn' => 'sometimes|string|unique:books,isbn,' . $books->id,
                 'publisher' => 'sometimes|string|max:255',
                 'year_published' => 'sometimes|string|max:4',
                 'stock' => 'sometimes|integer|min:0',
@@ -64,13 +64,13 @@ class BookController extends Controller
 
             // Only update the fields provided
             $data = $request->only(['title', 'isbn', 'publisher', 'year_published', 'stock']);
-            $book->update($data);
+            $books->update($data);
 
             return response()->json([
-                'message' => $book->wasChanged()
+                'message' => $books->wasChanged()
                     ? 'Book data successfully updated.'
                     : 'No changes were made.',
-                'data' => $book
+                'data' => $books
             ], 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Book not found'], 404);
@@ -80,8 +80,8 @@ class BookController extends Controller
     public function destroy($id): JsonResponse
     {
         try {
-            $book = Book::findOrFail($id);
-            $book->delete();
+            $books = Book::findOrFail($id);
+            $books->delete();
 
             return response()->json(['message' => 'Book successfully deleted.']);
         } catch (ModelNotFoundException $e) {

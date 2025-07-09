@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Loan extends Model
 {
@@ -14,15 +15,17 @@ class Loan extends Model
 
     protected $fillable = [
         'user_id',
-        'book_id',
-        'status',
+        // 'book_id',
+        'tanggal_kembali',
+        'denda',
+        'status_peminjaman',
     ];
 
     protected function casts(): array
     {
         return [
             'user_id' => 'string',
-            'book_id' => 'string',
+            // 'book_id' => 'string',
         ];
     }
 
@@ -31,9 +34,11 @@ class Loan extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function book(): BelongsTo
+    public function books(): BelongsToMany
     {
-        return $this->belongsTo(Book::class, 'book_id');
+        return $this->belongsToMany(Book::class, 'loan_details', 'loan_id', 'book_id')
+                    ->withPivot('status_buku')
+                    ->withTimestamps();
     }
 
 }

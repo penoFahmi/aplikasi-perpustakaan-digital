@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //     Route::post('/user/store', 'store');
     //     Route::patch('/user/{id}/update', 'update');
     //     Route::get('/user/{id}','show');
-    //     Route::delete('/user/{id}', 'destroy');                  
+    //     Route::delete('/user/{id}', 'destroy');
     // });
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user/profile', [UserController::class, 'profile']);
@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('book', BookController::class);
         Route::apiResource('book_author', BookAuthorController::class);
         Route::apiResource('loan', LoanController::class);
+        Route::post('loan/{id}/return', [LoanController::class, 'return']);
 
     });
 });

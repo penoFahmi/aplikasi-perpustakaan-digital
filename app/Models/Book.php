@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
@@ -31,9 +32,9 @@ class Book extends Model
         ];
     }
 
-    public function loans(): HasMany
+    public function loans(): BelongsToMany
     {
-        return $this->hasMany(Loan::class, 'book_id');
+        return $this->belongsToMany(Loan::class, 'loan_details', 'book_id', 'loan_id');
     }
 
     public function bookAuthors(): HasMany
