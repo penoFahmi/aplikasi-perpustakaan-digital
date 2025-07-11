@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tanggal_kembali');
             $table->unsignedInteger('denda')->default(0);
             $table->string('status_peminjaman')->default('Dipinjam');
+            $table->string('status_denda')->default('Lunas');
             $table->timestamps();
         });
     }

@@ -182,12 +182,13 @@ class LoanController extends Controller
 
                 // 1. Hitung Denda Keterlambatan
                 $denda_keterlambatan = 0;
-                $tanggal_seharusnya_kembali = Carbon::parse($loan->tanggal_kembali);
-                $tanggal_aktual_kembali = Carbon::now();
+                $tanggal_seharusnya_kembali = Carbon::parse($loan->tanggal_kembali)->startOfDay();
+                $tanggal_aktual_kembali = Carbon::now()->startOfDay();
 
                 if ($tanggal_aktual_kembali->greaterThan($tanggal_seharusnya_kembali)) {
-                    $hari_terlambat = $tanggal_aktual_kembali->diffInDays($tanggal_seharusnya_kembali);
-                    $tarif_harian = 1000; // Contoh: Rp 1.000 per hari
+                    // PERBAIKAN: Hitung selisih hari berdasarkan awal hari
+                    $hari_terlambat = $tanggal_aktual_kembali->diffInDays($tanggal_seharusnya_kembali, true);
+                    $tarif_harian = 1000;
                     $denda_keterlambatan = $hari_terlambat * $tarif_harian;
                 }
 
@@ -211,10 +212,13 @@ class LoanController extends Controller
                 // AKHIR LOGIKA PERHITUNGAN DENDA
                 // ==========================================================
 
+                $statusDenda = ($total_denda > 0) ? 'Belum Lunas' : 'Lunas';
+
                 // Update status peminjaman utama dengan total denda
                 $loan->update([
                     'status_peminjaman' => 'Dikembalikan',
-                    'denda' => $total_denda, // Simpan total denda di sini
+                    'denda' => $total_denda,
+                    'status_denda' => $statusDenda,
                 ]);
 
                 // Kembalikan stok & update status buku di pivot
@@ -239,6 +243,27 @@ class LoanController extends Controller
 
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 422);
+        }
+    }
+
+    public function payFine($id): JsonResponse
+    {
+        try {
+            $loan = Loan::findOrFail($id);
+
+            if ($loan->status_denda === 'Lunas') {
+                return response()->json(['message' => 'Denda untuk peminjaman ini sudah lunas.'], 400);
+            }
+
+            $loan->update(['status_denda' => 'Lunas']);
+
+            return response()->json([
+                'message' => 'Denda berhasil dibayar.',
+                'data' => $loan
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Data peminjaman tidak ditemukan.'], 404);
         }
     }
 

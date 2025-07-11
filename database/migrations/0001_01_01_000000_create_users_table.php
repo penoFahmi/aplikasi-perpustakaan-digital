@@ -28,7 +28,7 @@ return new class extends Migration
             $table->timestamp('membership_date')->useCurrent();
             $table->rememberToken();
             $table->timestamps();
-            $table->foreignUlid('role_id')->constrained('roles')->casecadeonDelete();
+            $table->foreignUlid('role_id')->constrained('roles')->cascadeOnDelete();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

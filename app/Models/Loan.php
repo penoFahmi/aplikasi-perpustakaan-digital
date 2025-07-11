@@ -19,6 +19,7 @@ class Loan extends Model
         'tanggal_kembali',
         'denda',
         'status_peminjaman',
+        'status_denda',
     ];
 
     protected function casts(): array
