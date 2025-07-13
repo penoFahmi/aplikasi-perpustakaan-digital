@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
@@ -12,45 +11,60 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
 
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+*/
+
+// --- Rute Publik (Autentikasi) ---
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// --- Rute Terproteksi (Butuh Login) ---
 Route::middleware('auth:sanctum')->group(function () {
-
-    //Akun
-    // Route::controller(UserController::class)->group(function(){
-    //     Route::get('/user', 'index');
-    //     Route::post('/user/store', 'store');
-    //     Route::patch('/user/{id}/update', 'update');
-    //     Route::get('/user/{id}','show');
-    //     Route::delete('/user/{id}', 'destroy');
-    // });
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/user/profile', [UserController::class, 'profile']);
-    Route::patch('/user/profile', [UserController::class, 'profile']);
-    Route::apiResource('loan', LoanController::class);
-    Route::apiResource('user', UserController::class);
-    Route::delete('/user/{user}', [UserController::class, 'deleteAccount']);
 
+    // --- Rute Profil Pengguna (Untuk diri sendiri) ---
+    Route::get('/user/profile', [UserController::class, 'profile']);
+    Route::patch('/user/profile', [UserController::class, 'updateProfile']); // Lebih eksplisit
+
+    // --- Rute Peminjaman untuk Pengguna Biasa (hanya melihat daftar dan detail) ---
+    Route::apiResource('loan', LoanController::class)->only(['index', 'show']);
+
+    // --- Grup Rute Khusus untuk Superadmin & Pustakawan ---
     Route::middleware('role:superadmin,pustakawan')->group(function () {
+
+        // --- Manajemen Resource Inti ---
         Route::apiResource('author', AuthorController::class);
         Route::apiResource('book', BookController::class);
+        Route::post('/book/import', [BookController::class, 'import']);
         Route::apiResource('book_author', BookAuthorController::class);
-        Route::apiResource('loan', LoanController::class);
-        Route::post('loan/{id}/return', [LoanController::class, 'return']);
-        Route::post('loan/{id}/pay', [LoanController::class, 'payFine']);
-        Route::prefix('dashboard')->group(function () {
-            Route::get('/stats', [DashboardController::class, 'stats']);
-            Route::get('/overdue-loans', [DashboardController::class, 'overdueLoans']);
-            Route::get('/loan-activity', [DashboardController::class, 'loanActivity']);
-            Route::get('/popular-books', [DashboardController::class, 'popularBooks']);
+        Route::apiResource('user', UserController::class);
+
+        // --- Manajemen Peminjaman (CRUD penuh & aksi tambahan) ---
+        Route::apiResource('loan', LoanController::class)->except(['index', 'show']);
+        Route::post('loan/{loan}/return', [LoanController::class, 'return']);
+        Route::post('loan/{loan}/pay', [LoanController::class, 'payFine']);
+
+        // --- Rute Dashboard ---
+        Route::prefix('dashboard')->controller(DashboardController::class)->group(function () {
+            Route::get('/stats', 'stats');
+            Route::get('/overdue-loans', 'overdueLoans');
+            Route::get('/loan-activity', 'loanActivity');
+            Route::get('/popular-books', 'popularBooks');
         });
-        Route::prefix('reports')->name('reports.')->group(function () {
-            Route::get('/loans', [ReportController::class, 'loans'])->name('loans');
-            Route::get('/overdue-returns', [ReportController::class, 'overdueReturns'])->name('overdue-returns');
-            Route::get('/member-activity', [ReportController::class, 'memberActivity'])->name('member-activity');
-            Route::get('/book-inventory', [ReportController::class, 'bookInventory'])->name('book-inventory');
-            Route::get('/fines', [ReportController::class, 'fines'])->name('fines');
+
+        // --- Rute Laporan (Termasuk Ekspor) ---
+        Route::prefix('reports')->controller(ReportController::class)->group(function () {
+            Route::get('/loans', 'loans');
+            Route::get('/overdue-returns', 'overdueReturns');
+            Route::get('/member-activity', 'memberActivity');
+            Route::get('/book-inventory', 'bookInventory');
+            Route::get('/fines', 'fines');
+
+            // Ekspor dipindahkan ke dalam grup ini
+            Route::get('/{report_type}/export/{format}', 'export');
         });
     });
 });

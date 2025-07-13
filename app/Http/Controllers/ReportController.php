@@ -5,10 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\User;
+use App\Models\Author;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\LoansReportExport;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
@@ -17,17 +21,34 @@ class ReportController extends Controller
      */
     public function loans(Request $request): JsonResponse
     {
+        // PERUBAHAN 1: Validasi dibuat tidak wajib (opsional).
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'sometimes|required_with:end_date|date',
+            'end_date' => 'sometimes|required_with:start_date|date|after_or_equal:start_date',
         ]);
 
-        $loans = Loan::with(['user:id,name', 'books:id,title'])
-            ->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()])
-            ->latest()
-            ->get();
+        $query = Loan::with(['user:id,name', 'books:id,title']);
 
-        return response()->json($loans);
+        // PERUBAHAN 2: Terapkan filter tanggal hanya jika ada di request.
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
+        }
+
+        $loans = $query->latest()->get();
+
+        // PERUBAHAN 3: Transformasi data agar sesuai dengan frontend.
+        $reportData = $loans->map(function ($loan) {
+            return [
+                'member_name' => $loan->user->name ?? 'N/A',
+                // Gabungkan judul buku jika ada lebih dari satu
+                'book_title' => $loan->books->pluck('title')->implode(', '),
+                'loan_date' => Carbon::parse($loan->created_at)->format('Y-m-d'),
+                'due_date' => Carbon::parse($loan->tanggal_kembali)->format('Y-m-d'),
+                'status' => $loan->status_peminjaman,
+            ];
+        });
+
+        return response()->json($reportData);
     }
 
     /**
@@ -36,24 +57,32 @@ class ReportController extends Controller
     public function overdueReturns(Request $request): JsonResponse
     {
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'sometimes|required_with:end_date|date',
+            'end_date' => 'sometimes|required_with:start_date|date|after_or_equal:start_date',
         ]);
 
-        $overdueLoans = Loan::with('user:id,name')
+        $query = Loan::with(['user:id,name', 'books:id,title'])
             ->where('status_peminjaman', 'Dikembalikan')
-            ->where('denda', '>', 0)
-            ->whereBetween('updated_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()])
-            ->get()
-            ->map(function ($loan) {
-                // Menghitung hari terlambat untuk laporan
-                $dueDate = Carbon::parse($loan->tanggal_kembali)->startOfDay();
-                $returnDate = Carbon::parse($loan->updated_at)->startOfDay();
-                $loan->hari_terlambat = $returnDate->diffInDays($dueDate);
-                return $loan;
-            });
+            ->where('denda', '>', 0);
 
-        return response()->json($overdueLoans);
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('updated_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
+        }
+
+        $overdueLoans = $query->get();
+
+        $reportData = $overdueLoans->map(function ($loan) {
+            $dueDate = Carbon::parse($loan->tanggal_kembali)->startOfDay();
+            $returnDate = Carbon::parse($loan->updated_at)->startOfDay();
+            return [
+                'member_name' => $loan->user->name ?? 'N/A',
+                'book_title' => $loan->books->pluck('title')->implode(', '),
+                'return_date' => $returnDate->format('Y-m-d'),
+                'days_overdue' => $returnDate->diffInDays($dueDate),
+            ];
+        });
+
+        return response()->json($reportData);
     }
 
     /**
@@ -62,23 +91,35 @@ class ReportController extends Controller
     public function memberActivity(Request $request): JsonResponse
     {
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'sometimes|required_with:end_date|date',
+            'end_date' => 'sometimes|required_with:start_date|date|after_or_equal:start_date',
         ]);
 
-        $members = User::whereHas('role', function ($query) {
-                $query->where('name', 'user');
-            })
-            ->withCount(['loans' => function ($query) use ($request) {
-                $query->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
-            }])
-            ->withSum(['loans as total_fines' => function ($query) use ($request) {
-                $query->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
-            }], 'denda')
-            ->orderByDesc('loans_count')
-            ->get();
+        $query = User::whereHas('role', function ($q) {
+            $q->where('name', 'user');
+        });
 
-        return response()->json($members);
+        $query->withCount(['loans as total_loans' => function ($q) use ($request) {
+            if ($request->has('start_date') && $request->has('end_date')) {
+                $q->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
+            }
+        }])->withSum(['loans as total_fines' => function ($q) use ($request) {
+            if ($request->has('start_date') && $request->has('end_date')) {
+                $q->whereBetween('created_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
+            }
+        }], 'denda');
+
+        $members = $query->orderByDesc('total_loans')->get();
+
+        $reportData = $members->map(function($member) {
+            return [
+                'member_name' => $member->name,
+                'total_loans' => $member->total_loans,
+                'total_fines' => (int) $member->total_fines, // Casting ke integer
+            ];
+        });
+
+        return response()->json($reportData);
     }
 
     /**
@@ -86,14 +127,20 @@ class ReportController extends Controller
      */
     public function bookInventory(): JsonResponse
     {
+
         $books = Book::withCount(['loans as active_loans_count' => function ($query) {
             $query->where('status_peminjaman', 'Dipinjam');
-        }])->get()->map(function ($book) {
-            $book->available_stock = $book->stock - $book->active_loans_count;
-            return $book;
+        }])->get();
+
+        $reportData = $books->map(function ($book) {
+            return [
+                'title' => $book->title,
+                'total_stock' => $book->stock,
+                'available_stock' => $book->stock - $book->active_loans_count,
+            ];
         });
 
-        return response()->json($books);
+        return response()->json($reportData);
     }
 
     /**
@@ -102,16 +149,43 @@ class ReportController extends Controller
     public function fines(Request $request): JsonResponse
     {
         $request->validate([
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_date' => 'sometimes|required_with:end_date|date',
+            'end_date' => 'sometimes|required_with:start_date|date|after_or_equal:start_date',
         ]);
 
-        $finesReport = Loan::with('user:id,name')
-            ->where('denda', '>', 0)
-            ->whereBetween('updated_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()])
-            ->select('id', 'user_id', 'denda', 'status_denda', 'updated_at as payment_date')
-            ->get();
+        $query = Loan::with(['user:id,name', 'books:id,title'])
+            ->where('denda', '>', 0);
 
-        return response()->json($finesReport);
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('updated_at', [$request->start_date, Carbon::parse($request->end_date)->endOfDay()]);
+        }
+
+        $finesReport = $query->get();
+
+        $reportData = $finesReport->map(function($fine) {
+            return [
+                'member_name' => $fine->user->name ?? 'N/A',
+                'book_title' => $fine->books->pluck('title')->implode(', '),
+                'amount' => $fine->denda,
+                'paid_at' => Carbon::parse($fine->updated_at)->format('Y-m-d'),
+            ];
+        });
+
+        return response()->json($reportData);
+    }
+    public function exportLoansExcel()
+    {
+        return Excel::download(new LoansReportExport, 'laporan-peminjaman.xlsx');
+    }
+    public function exportLoansPdf()
+    {
+        // 1. Ambil data yang diperlukan
+        $data['loans'] = Loan::with(['user:id,name', 'books:id,title'])->get();
+
+        // 2. Load view dan data ke PDF
+        $pdf = PDF::loadView('reports.loans_pdf', $data);
+
+        // 3. Unduh file PDF
+        return $pdf->download('laporan-peminjaman.pdf');
     }
 }
