@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // --- Manajemen Resource Inti ---
         Route::apiResource('author', AuthorController::class);
+        Route::post('/author/import', [AuthorController::class, 'import']);
         Route::apiResource('book', BookController::class);
         Route::post('/book/import', [BookController::class, 'import']);
         Route::apiResource('book_author', BookAuthorController::class);
@@ -64,7 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/fines', 'fines');
 
             // Ekspor dipindahkan ke dalam grup ini
-            Route::get('/{report_type}/export/{format}', 'export');
+            Route::get('/{reportType}/export/{format}', [ReportController::class, 'exportReport'])->where('format', 'pdf|excel');
         });
     });
 });

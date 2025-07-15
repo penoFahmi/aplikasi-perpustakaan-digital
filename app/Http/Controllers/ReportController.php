@@ -11,8 +11,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\LoansReportExport;
 use Barryvdh\DomPDF\Facade\Pdf;
+
+use App\Exports\LoansReportExport;
+use App\Exports\OverdueReturnsReportExport;
+use App\Exports\FinesReportExport;
+use App\Exports\MemberActivityReportExport;
+use App\Exports\BookInventoryReportExport;
 
 class ReportController extends Controller
 {
@@ -173,19 +178,116 @@ class ReportController extends Controller
 
         return response()->json($reportData);
     }
-    public function exportLoansExcel()
-    {
-        return Excel::download(new LoansReportExport, 'laporan-peminjaman.xlsx');
-    }
-    public function exportLoansPdf()
-    {
-        // 1. Ambil data yang diperlukan
-        $data['loans'] = Loan::with(['user:id,name', 'books:id,title'])->get();
 
-        // 2. Load view dan data ke PDF
-        $pdf = PDF::loadView('reports.loans_pdf', $data);
+    /**
+     * Menangani semua permintaan ekspor laporan.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $reportType Jenis laporan (loans, fines, dll.)
+     * @param  string  $format Format ekspor (pdf, excel)
+     * @return \Illuminate\Http\Response
+     */
+    public function exportReport(Request $request, $reportType, $format)
+    {
+        // Validasi dan ambil parameter tanggal dari request
+        $startDate = $request->query('start_date') ? Carbon::parse($request->query('start_date'))->startOfDay() : null;
+        $endDate = $request->query('end_date') ? Carbon::parse($request->query('end_date'))->endOfDay() : null;
 
-        // 3. Unduh file PDF
-        return $pdf->download('laporan-peminjaman.pdf');
+        $exportClass = null;
+        $viewName = null;
+        $viewData = [];
+
+        // Logika untuk setiap jenis laporan
+        switch ($reportType) {
+            case 'loans':
+                $query = Loan::with(['user:id,name', 'books:id,title']);
+                if ($startDate && $endDate) {
+                    // Filter berdasarkan tanggal peminjaman
+                    $query->whereBetween('loan_date', [$startDate, $endDate]);
+                }
+                $viewData['loans'] = $query->get();
+                $exportClass = new LoansReportExport($viewData['loans']);
+                $viewName = 'reports.loans_pdf';
+                break;
+
+            case 'overdue-returns':
+                $query = Loan::with(['user:id,name', 'books:id,title'])
+                    ->where('status_peminjaman', 'Dikembalikan')
+                    ->whereNotNull('actual_return_date')
+                    ->whereRaw('DATEDIFF(actual_return_date, due_date) > 0');
+
+                if ($startDate && $endDate) {
+                    // Filter berdasarkan tanggal pengembalian
+                    $query->whereBetween('actual_return_date', [$startDate, $endDate]);
+                }
+                $viewData['overdue_returns'] = $query->get()->map(function ($loan) {
+                    // Menghitung hari keterlambatan
+                    $loan->days_overdue = Carbon::parse($loan->actual_return_date)->diffInDays(Carbon::parse($loan->due_date));
+                    return $loan;
+                });
+                $exportClass = new OverdueReturnsReportExport($viewData['overdue_returns']);
+                $viewName = 'reports.overdue_returns_pdf';
+                break;
+
+            case 'fines':
+                $query = Loan::with(['user:id,name', 'books:id,title'])
+                    ->where('denda', '>', 0);
+
+                if ($startDate && $endDate) {
+                    // Filter berdasarkan tanggal pengembalian yang menghasilkan denda
+                    $query->whereBetween('actual_return_date', [$startDate, $endDate]);
+                }
+                $viewData['fines'] = $query->get();
+                $exportClass = new FinesReportExport($viewData['fines']);
+                $viewName = 'reports.fines_pdf';
+                break;
+
+            case 'member-activity':
+                // Query ini lebih kompleks, kita agregat data per user
+                $query = User::withCount(['loans as total_loans' => function ($query) use ($startDate, $endDate) {
+                        if ($startDate && $endDate) {
+                            $query->whereBetween('loan_date', [$startDate, $endDate]);
+                        }
+                    }])
+                    ->withSum(['loans as total_fines' => function ($query) use ($startDate, $endDate) {
+                        if ($startDate && $endDate) {
+                            $query->whereBetween('actual_return_date', [$startDate, $endDate]);
+                        }
+                    }], 'denda');
+
+                $viewData['members'] = $query->having('total_loans', '>', 0)->orHaving('total_fines', '>', 0)->get();
+                $exportClass = new MemberActivityReportExport($viewData['members']);
+                $viewName = 'reports.member_activity_pdf';
+                break;
+
+            case 'book-inventory':
+                // Laporan ini tidak memakai filter tanggal
+                $viewData['books'] = Book::withCount(['loans as borrowed_count' => function ($query) {
+                    $query->where('status_peminjaman', 'Dipinjam');
+                }])->get()->map(function ($book) {
+                    $book->available_stock = $book->stock - $book->borrowed_count;
+                    return $book;
+                });
+                $exportClass = new BookInventoryReportExport($viewData['books']);
+                $viewName = 'reports.book_inventory_pdf';
+                break;
+
+            default:
+                return response()->json(['message' => 'Tipe laporan tidak valid.'], 404);
+        }
+
+        // Buat nama file dinamis
+        $fileName = "laporan-{$reportType}-" . now()->format('Y-m-d') . ($format === 'excel' ? '.xlsx' : '.pdf');
+
+        // Ekspor berdasarkan format yang diminta
+        if ($format === 'excel') {
+            return Excel::download($exportClass, $fileName);
+        }
+
+        if ($format === 'pdf') {
+            // Pastikan Anda sudah membuat file view blade untuk setiap laporan
+            $pdf = PDF::loadView($viewName, $viewData);
+            return $pdf->download($fileName);
+        }
     }
 }
