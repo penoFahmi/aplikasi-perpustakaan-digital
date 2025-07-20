@@ -63,8 +63,6 @@ Route::middleware('auth:sanctum')->group(function () {
             Route::get('/member-activity', 'memberActivity');
             Route::get('/book-inventory', 'bookInventory');
             Route::get('/fines', 'fines');
-
-            // Ekspor dipindahkan ke dalam grup ini
             Route::get('/{reportType}/export/{format}', [ReportController::class, 'exportReport'])->where('format', 'pdf|excel');
         });
     });
